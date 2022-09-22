@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#Ищем словосочетание "continuous integration"
-
-#скачаем содержимое в файл для удобства
 # curl -o file https://www.atlassian.com/continuous-delivery/continuous-integration
 
 #1
@@ -10,3 +7,6 @@
 #2
 # cat file | grep -io 'continuous integration' | wc -l
 #3
+# cat file | grep -io 'continuous integration' | awk 'END{print NR}'
+#4
+
