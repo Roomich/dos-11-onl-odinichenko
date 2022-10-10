@@ -1,0 +1,36 @@
+---
+# tasks file for install-apache-webserver
+
+- block:   #======Debian=======
+
+  - name: install apache2 on Debian
+    apt: name=apache2 state=latest
+
+  - name: enable and start service
+    service: name=apache2 state=started enabled=yes
+
+  when: ansible_os_family == "Debian"
+
+- block:   #=====RedHat======
+
+  - name: install httpd on RedHat
+    yum: name=httpd state=latest
+
+  - name: enable and start service
+    service: name=httpd state=started enabled=yes
+
+  when: ansible_os_family == "RedHat"
+
+- name: copy index.html
+  template: src=index.j2 dest={{ dest_fold }}/index.html mode=555
+  notify:
+  - for_RedHat
+  - for_Debian
+
+- name: copy files to webserver
+  copy: src={{ item }} dest={{ dest_fold }} mode=555
+  loop:
+  - "puppy.jpg"
+  notify:
+  - for_RedHat
+  - for_Debian
