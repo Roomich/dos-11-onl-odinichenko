@@ -1,0 +1,4 @@
+---
+# defaults file for install-apache-webserver
+
+dest_fold: /var/www/html

@@ -1,0 +1,40 @@
+---
+ - name: Install and configure apache2 server
+   hosts: all
+   become: yes
+
+   tasks:
+
+   - name: install apache2 on Debian
+     apt: name=apache2 state=latest
+     when: ansible_os_family == "Debian"
+
+   - name: install httpd on RedHat
+     yum: name=httpd state=latest
+     when: ansible_os_family == "RedHat"
+
+   - name: copy files to server
+     copy: src=./index.html dest=/var/www/html mode=555
+     when: ansible_os_family == "Debian"
+     notify: for_Debian
+
+   - name: copy files to server
+     copy: src=./index.html dest=/var/www/html mode=555
+     when: ansible_os_family == "RedHat"
+     notify: for_RedHat
+
+   - name: enable and start service
+     service: name=httpd state=started enabled=yes
+     when: ansible_os_family == "RedHat"
+
+   - name: enable and start service
+     service: name=apache2 state=started enabled=yes
+     when: ansible_os_family == "Debian"
+
+   handlers:
+
+   - name: for_Debian
+     service: name=apache2 state=restarted
+
+   - name: for_RedHat
+     service: name=httpd state=restarted

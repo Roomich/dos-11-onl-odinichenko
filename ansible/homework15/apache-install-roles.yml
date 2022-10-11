@@ -1,0 +1,8 @@
+---
+ - name: Install and configure apache2 server
+   hosts: all
+   become: yes
+
+   roles:
+  #  - install-apache-webserver
+   - { role: install-apache-webserver, when: ansible_system == "Linux" }
