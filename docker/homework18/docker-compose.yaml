@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+
+  apache:
+
+    build: ./apache
+    container_name: "apache_web_server"
+    ports:
+    - "8080:80"
+    volumes:
+    - ./webcontent:/var/www/html
+
+  nginx:
+
+    build: ./nginx
+    container_name: "nginx_web_server"
+    ports:
+    - "8081:80"
+    volumes:
+    - ./webcontent:/usr/share/nginx/html
