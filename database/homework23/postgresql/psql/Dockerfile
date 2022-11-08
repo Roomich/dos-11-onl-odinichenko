@@ -12,6 +12,6 @@ EXPOSE 5432
 
 USER postgres
 
-CMD ["/usr/lib/postgresql/14/bin/postgres", "-D", "/var/lib/postgresql/14/main", "-c", "config_file=/etc/postgresql/14/main/postgresql.conf", "-i"]
-# CMD ["/bin/bash", "/var/lib/postgresqlstart.sh;"]
-# CMD ["/usr/lib/postgresql/14/bin/postgres", "-D", "/var/lib/postgresql/14/main", "-c", "config_file=/etc/postgresql/14/main/postgresql.conf;"]
+ENTRYPOINT ["/usr/lib/postgresql/14/bin/postgres"]
+
+CMD ["-D", "/var/lib/postgresql/14/main", "-c", "config_file=/etc/postgresql/14/main/postgresql.conf", "-i"]
