@@ -3,18 +3,15 @@ FROM ubuntu:focal
 ENV TZ=Europe/Minsk \
     DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update -y && apt-get install -y wget gnupg2 sudo && \
+RUN apt-get update -y && apt-get install -y wget gnupg2 && \
     sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt focal-pgdg main" > /etc/apt/sources.list.d/pgdg.list' && \
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
-    apt-get -y update && apt-get -y install postgresql-14 && \
-    chown -R postgres:postgres /etc/postgresql && chown -R postgres:postgres /var/lib/postgresql
-
-# COPY ./start.sh /var/lib/postgresql
+    apt-get -y update && apt-get -y install postgresql-14
 
 EXPOSE 5432
 
 USER postgres
 
-CMD ["/usr/lib/postgresql/14/bin/postgres", "-D", "/var/lib/postgresql/14/main", "-c", "config_file=/etc/postgresql/14/main/postgresql.conf", "-i";"]
+CMD ["/usr/lib/postgresql/14/bin/postgres", "-D", "/var/lib/postgresql/14/main", "-c", "config_file=/etc/postgresql/14/main/postgresql.conf", "-i"]
 # CMD ["/bin/bash", "/var/lib/postgresqlstart.sh;"]
 # CMD ["/usr/lib/postgresql/14/bin/postgres", "-D", "/var/lib/postgresql/14/main", "-c", "config_file=/etc/postgresql/14/main/postgresql.conf;"]
