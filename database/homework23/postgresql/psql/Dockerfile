@@ -13,8 +13,8 @@ RUN apt-get update -y && apt-get install -y wget gnupg2 sudo && \
 
 EXPOSE 5432
 
-# USER postgres
+USER postgres
 
-CMD ["sudo", "-u", "postgres", "/usr/lib/postgresql/14/bin/postgres", "-D", "/var/lib/postgresql/14/main", "-c", "config_file=/etc/postgresql/14/main/postgresql.conf", "-i";"]
+CMD ["/usr/lib/postgresql/14/bin/postgres", "-D", "/var/lib/postgresql/14/main", "-c", "config_file=/etc/postgresql/14/main/postgresql.conf", "-i";"]
 # CMD ["/bin/bash", "/var/lib/postgresqlstart.sh;"]
 # CMD ["/usr/lib/postgresql/14/bin/postgres", "-D", "/var/lib/postgresql/14/main", "-c", "config_file=/etc/postgresql/14/main/postgresql.conf;"]
