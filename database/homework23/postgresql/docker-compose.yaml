@@ -5,7 +5,7 @@ services:
   postgresql:
 
     container_name: "my_postgresql"
-    build: ./postgresql
+    build: ./psql
     ports:
       - "5432:5432"
     environment:
