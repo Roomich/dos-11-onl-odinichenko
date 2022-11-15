@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  
+  postgresql:
+
+    container_name: "my_postgresql"
+    build: ./psql
+    ports:
+      - "5432:5432"
+    environment:
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=postgres'
+    restart: always
