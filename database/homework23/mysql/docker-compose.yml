@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+
+  mysql_database:
+    build: ./mysql
+    container_name: "mysql_cont"
+    ports:
+      - "3306:3306"
+      - "3360:3360"
+    restart: always
